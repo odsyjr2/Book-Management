@@ -7,7 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+// TODO: ControllerAdvice 사용시  Swagger 안되는 문제
+//@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
