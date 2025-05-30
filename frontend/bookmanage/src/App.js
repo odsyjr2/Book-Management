@@ -5,7 +5,6 @@ import MainPage from './pages/MainPage';
 import NewBook from './pages/NewBook';
 import GenerateImage from './pages/GenerateImage';
 import BookListPage from './pages/BookListPage';
-import BookDetailPage from './pages/BookDetailPage'; // 선택
 
 function App() {
   return (
