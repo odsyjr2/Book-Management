@@ -6,7 +6,9 @@ function App() {
 
   // page, setPage 선언
   const [page, setPage] = useState("add"); // 'add' 또는 'list'
-  
+
+
+  // 임의 등록 페이지 localhost:3000/books
   useEffect(() => {
     if (window.location.pathname === "/books") {
       setPage("add");

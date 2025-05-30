@@ -8,7 +8,7 @@ function BookDetailPage() {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
-    imageUrl: "",
+    coverImageUrl: "",
   });
   const [loading, setLoading] = useState(false);
   const [submittedBooks, setSubmittedBooks] = useState([]);
@@ -27,20 +27,25 @@ function BookDetailPage() {
     setLoading(true);
     try {
       const url = await generateImage(apiKey, formData.title, formData.content);
-      setFormData((prev) => ({ ...prev, imageUrl: url }));
+      setFormData((prev) => ({ ...prev, coverImageUrl: url }));
+      console.log(url)
     } catch (err) {
       alert("이미지 생성 실패: " + err.message);
     }
+    
     setLoading(false);
   };
 
-  //
+  
+  // createBook 호출해 서버에 데이터 전송 
   const handleSubmit = async (e) => {
+
+    // 폼 제출 시 페이지 리로드 방지
     e.preventDefault();
     try {
       await createBook(formData);
       setSubmittedBooks((prev) => [...prev, formData]); // 리스트 추가
-      setFormData({ title: "", content: "", imageUrl: "" });
+      setFormData({ title: "", content: "", coverImageUrl: "" });
     } catch {
       alert("도서 등록 실패");
     }
@@ -79,8 +84,7 @@ function BookDetailPage() {
           이미지 생성
         </Button>
         {loading && <CircularProgress style={{ margin: "1rem" }} />} {/*로딩 이미지*/}
-        {formData.imageUrl && <img src={formData.imageUrl} alt="Generated" width="300" />}
-
+        {formData.coverImageUrl && <img src={formData.coverImageUrl} alt="Generated" width="300" />}
         <Button type="submit" variant="contained" color="primary" fullWidth style={{ marginTop: "1rem" }}>
           도서 등록
         </Button>
