@@ -16,7 +16,7 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public Book createBook(Book book) {
+    public Book createdAt(Book book) {
         return bookRepository.save(book);
     }
 
@@ -28,7 +28,7 @@ public class BookService {
         return bookRepository.findById(id);
     }
 
-    public Book updateBook(Long id, Book updatedBook) {
+    public Book updateBook(Long id, Book updatedAt) {
         return bookRepository.findById(id)
                 .map(book -> {
                     book.setTitle(updatedBook.getTitle());
