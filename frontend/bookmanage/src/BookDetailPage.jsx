@@ -33,7 +33,7 @@ function BookDetailPage() {
     }
     setLoading(false);
   };
-  
+
   //
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -97,5 +97,6 @@ function BookDetailPage() {
     </div>
   );
 }
+
 
 export default BookDetailPage;
