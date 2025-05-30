@@ -86,7 +86,7 @@ class BookControllerTest {
     @Test
     void updateBook_returnsUpdatedBook() throws Exception {
         Long bookId = 1L;
-        BookDto.Patch patchRequest = new BookDto.Patch("수정된 제목", "수정된 내용");
+        BookDto.Patch patchRequest = new BookDto.Patch("수정된 제목", "수정된 내용", "표지url");
 
         Book existingBook = new Book(bookId, "기존 제목", "기존 내용", LocalDateTime.now(), LocalDateTime.now(), null);
         Book updatedBook = new Book(bookId, "수정된 제목", "수정된 내용", existingBook.getCreatedAt(), LocalDateTime.now(), null);
