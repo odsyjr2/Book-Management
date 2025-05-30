@@ -1,4 +1,4 @@
-package com.example.bookmanage;
+package com.aivle.book_management;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
