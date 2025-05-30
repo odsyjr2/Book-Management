@@ -3,6 +3,7 @@ import './App.css';
 import Home from './Home'
 import BookList from './Booklist';
 import BookDetail from './BookDetail';
+import Navbar from './Navbar';
 
 function App() {
   return (
