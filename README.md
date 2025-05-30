@@ -24,7 +24,7 @@ KT AIVLE School 4차 미니프로젝트: **Spring Boot + React 기반 도서 관
 │   └── BookMapper.java
 ├── repository       
 │   └── BookRepository.java
-├── service             # 수정 가능
+├── service             
 │   └── BookService.java
 └── BookManagementApplication.java  
 ```

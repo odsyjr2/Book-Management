@@ -1,7 +1,7 @@
 package com.aivle.book_management.service;
 
-import com.example.bookmanager.entity.Book;
-import com.example.bookmanager.repository.BookRepository;
+import com.aivle.book_management.entity.Book;
+import com.aivle.book_management.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
