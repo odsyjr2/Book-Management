@@ -86,14 +86,14 @@ function BookDetailPage() {
         </Button>
       </form>
 
-      <h3 style={{ marginTop: "2rem" }}>등록된 도서 목록</h3>
+      {/* <h3 style={{ marginTop: "2rem" }}>등록된 도서 목록</h3>
       {submittedBooks.map((book, idx) => (
         <div key={idx} style={{ marginTop: "1rem", border: "1px solid #ccc", padding: "1rem" }}>
           <h4>{book.title}</h4>
           <p>{book.content}</p>
           {book.imageUrl && <img src={book.imageUrl} alt="book" width="200" />}
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
