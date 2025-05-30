@@ -33,6 +33,7 @@ public class BookDto {
     public static class Patch {
         private String title;
         private String content;
+        private String coverImageUrl;
     }
 
 }

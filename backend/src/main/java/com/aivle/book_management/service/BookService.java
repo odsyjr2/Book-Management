@@ -40,6 +40,8 @@ public class BookService {
     }
 
     public void deleteBook(Long id) {
-        bookRepository.deleteById(id);
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("도서를 찾을 수 없습니다."));
+        bookRepository.delete(book);
     }
 }
