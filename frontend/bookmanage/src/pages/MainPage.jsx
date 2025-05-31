@@ -1,40 +1,38 @@
 import Header from '../components/Header';
-import BookCard from '../components/BookCard';
+import SimpleBookCard from '../components/SimpleBookCard';
+import { Container, Typography, Grid, Box } from '@mui/material';
+import { useEffect, useState } from 'react';
+import bookData from '../data.json';
 
 function MainPage() {
-  const recommendedBooks = [
-    {
-      id: 1,
-      title: '이달의 책 1',
-      imageUrl: 'https://via.placeholder.com/150x220?text=책+1',
-    },
-    {
-      id: 2,
-      title: '이달의 책 2',
-      imageUrl: 'https://via.placeholder.com/150x220?text=책+2',
-    },
-    {
-      id: 3,
-      title: '이달의 책 3',
-      imageUrl: 'https://via.placeholder.com/150x220?text=책+3',
-    },
-  ];
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    // 추천 도서 3개만 (id 기준 앞쪽에서 잘라옴)
+    setBooks(bookData.slice(0, 3));
+  }, []);
 
   return (
     <div>
       <Header />
-      <main className="p-6">
-        <h2 className="text-2xl font-bold mb-4">이달의 책 👑</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {recommendedBooks.map(book => (
-            <BookCard
-              key={book.id}
-              title={book.title}
-              imageUrl={book.imageUrl}
-            />
+      <Container maxWidth="lg" sx={{ py: 5 }}>
+        <Box textAlign="center" mb={4}>
+          <Typography variant="h4" fontWeight="bold">
+            이달의 책 👑
+          </Typography>
+        </Box>
+        <Grid container spacing={4} justifyContent="center">
+          {books.map((book) => (
+            <Grid item key={book.id}>
+              <SimpleBookCard
+                id={book.id}
+                title={book.title}
+                imageUrl={book.imageUrl}
+              />
+            </Grid>
           ))}
-        </div>
-      </main>
+        </Grid>
+      </Container>
     </div>
   );
 }

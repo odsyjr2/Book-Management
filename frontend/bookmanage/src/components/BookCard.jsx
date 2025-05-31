@@ -1,13 +1,35 @@
-function BookCard({ title, imageUrl }) {
+import React from 'react';
+import { Card, CardMedia, Typography, CardActionArea } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
+function BookCard({ id, title, imageUrl, showTitleFirst = true }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/books/${id}`);
+  };
+
   return (
-    <div className="bg-white shadow-md rounded p-4 w-48 text-center">
-      <img
-        src={imageUrl}
-        alt={title}
-        className="w-full h-60 object-cover rounded mb-2"
-      />
-      <h3 className="text-md font-semibold">{title}</h3>
-    </div>
+    <Card sx={{ textAlign: 'center', boxShadow: 3, p: 1 }}>
+      <CardActionArea onClick={handleClick}>
+        {showTitleFirst && (
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 1 }}>
+            {title}
+          </Typography>
+        )}
+        <CardMedia
+          component="img"
+          image={imageUrl}
+          alt={title}
+          sx={{ width: 150, height: 220, margin: '0 auto' }}
+        />
+        {!showTitleFirst && (
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 1 }}>
+            {title}
+          </Typography>
+        )}
+      </CardActionArea>
+    </Card>
   );
 }
 
