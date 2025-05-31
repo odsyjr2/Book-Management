@@ -30,7 +30,16 @@ function BookDetailPages() {
   return (
     <div>
       <Header />
-      <Container maxWidth="md" sx={{ py: 5 }}>
+
+      {/* Header 아래 여백 넉넉하게 */}
+      <Container maxWidth="md" sx={{ pt: 8, pb: 5 }}>
+        {/* 오른쪽 끝에 수정 버튼 */}
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
+          <Button variant="outlined" size="small" onClick={handleEdit}>
+            작품 수정
+          </Button>
+        </Box>
+
         <Grid container spacing={4}>
           {/* 왼쪽: 책 이미지 */}
           <Grid item xs={12} md={4}>
@@ -42,35 +51,23 @@ function BookDetailPages() {
             />
           </Grid>
 
-          {/* 오른쪽: 책 정보 */}
+          {/* 오른쪽: 제목 + 정보 */}
           <Grid item xs={12} md={8}>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                mb: 4
-              }}
-            >
-              <Typography variant="h4" fontWeight="bold">
-                {book.title}
-              </Typography>
-              <Button
-                variant="outlined"
-                size="small"
-                onClick={handleEdit}
-              >
-                작품 수정
-              </Button>
-            </Box>
+            {/* 제목 */}
+            <Typography variant="h4" fontWeight="bold" sx={{ mb: 3 }}>
+              {book.title}
+            </Typography>
 
+            {/* 작성자 & 작성일 */}
             <Typography variant="subtitle1" gutterBottom>
               작성자: {book.author}
             </Typography>
             <Typography variant="subtitle1" gutterBottom>
               작성일: {book.date}
             </Typography>
-            <Typography variant="body1" sx={{ mt: 2 }}>
+
+            {/* 본문 */}
+            <Typography variant="body1" sx={{ mt: 4 }}>
               {book.description}
             </Typography>
           </Grid>

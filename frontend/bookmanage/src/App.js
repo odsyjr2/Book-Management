@@ -7,6 +7,7 @@ import GenerateImage from './pages/GenerateImage';
 import BookListPage from './pages/BookListPage';
 import BookDetailPage from './pages/BookDetailPage';
 import BookEditPage from './pages/BookEditPage';
+import BookSubmitPage from './pages/BookSubmitPage';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/books" element={<BookListPage />} />
         <Route path="/books/:id" element={<BookDetailPage />} />
         <Route path="/books/:id/edit" element={<BookEditPage />} />
+        <Route path="/write" element={<BookSubmitPage />} />
       </Routes>
     </Router>
   );
