@@ -1,28 +1,27 @@
 import React, { useState,useEffect } from "react";
-import BookDetailPage from "./BookDetailPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import MainPage from './pages/MainPage';
+import NewBook from './pages/NewBook';
+import GenerateImage from './pages/GenerateImage';
+import BookListPage from './pages/BookListPage';
+import BookDetailPage from "./pages/BookDetailPage";
+
 function App() {
-
-  // page, setPage 선언
-  const [page, setPage] = useState("add"); // 'add' 또는 'list'
-
-
-  // 임의 등록 페이지 localhost:3000/books
-  useEffect(() => {
-    if (window.location.pathname === "/books") {
-      setPage("add");
-    } else {
-      setPage("home");
-    }
-  }, []);
-
-  // page 가 add일 때
   return (
-    <div className="App">
-      {page === "add" && <BookDetailPage />}
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/generate-image" element={<BookDetailPage />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/write" element={<NewBook />} />
+          {/* <Route path="/generate-image" element={<GenerateImage />} /> */}
+          <Route path="/books" element={<BookListPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
+
 
 export default App;
