@@ -1,13 +1,20 @@
+import { Card, CardMedia, CardContent, Typography } from '@mui/material';
+
 function BookCard({ title, imageUrl }) {
   return (
-    <div className="bg-white shadow-md rounded p-4 w-48 text-center">
-      <img
-        src={imageUrl}
+    <Card sx={{ maxWidth: 300, margin: 'auto' }}>
+      <CardMedia
+        component="img"
+        image={imageUrl || '/default-cover.jpg'}
         alt={title}
-        className="w-full h-60 object-cover rounded mb-2"
+        sx={{ height: 200, objectFit: 'cover' }}
       />
-      <h3 className="text-md font-semibold">{title}</h3>
-    </div>
+      <CardContent>
+        <Typography variant="h6" noWrap>
+          {title}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 }
 

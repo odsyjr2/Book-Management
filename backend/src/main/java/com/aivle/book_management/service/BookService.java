@@ -42,4 +42,8 @@ public class BookService {
     public void deleteBook(Long id) {
         bookRepository.deleteById(id);
     }
+    public void deleteAllBooks() {
+        bookRepository.deleteAll();
+    }
+
 }

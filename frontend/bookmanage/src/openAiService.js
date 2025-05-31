@@ -1,12 +1,5 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8080/books";
-
-export const createBook = async (book) => {
-  const response = await axios.post(API_BASE_URL, book);    // API_BASE_URL 로 POST 요청
-  return response.data;
-};
-
 // AI 이미지 생성
 export const generateImage = async (apiKey, title, content) => { 
   

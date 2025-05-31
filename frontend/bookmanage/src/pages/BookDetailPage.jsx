@@ -4,14 +4,29 @@ import WritingForm from '../components/WritingForm';
 import GenerateImageButton from '../components/GenerateImageButton';
 import ImagePreview from '../components/ImagePreview';
 import NextButton from '../components/NextButton';
-import { createBook, generateImage } from '../openAiService';
+import { generateImage } from '../openAiService';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from "axios";
+
+
+// POST 요청 함수 정의
+const updateBook = async (id, book) => {
+  try {
+    const response = await axios.patch(`http://localhost:8080/books/${id}`, book);
+    return response.data;
+  } catch (error) {
+    console.error("도서 업데이트 중 오류:", error.response || error.message);
+    throw error;
+  }
+};
+
 
 function BookDetailPage() {
   const [apiKey, setApiKey] = useState('');
   const navigate = useNavigate();  
   const location = useLocation();
-  const { title, content } = location.state || {};
+  const { id, title, content } = location.state || {};  
+
   const [formData, setFormData] = useState({
     title: title || '',
     content: content || '',
@@ -38,7 +53,7 @@ function BookDetailPage() {
   const handleSubmit = async () => {
     try {
       console.log("보낼 데이터", formData)
-      await createBook(formData);
+      await updateBook(id, formData); 
       alert('도서 등록 성공!');
       navigate('/books');
       setFormData({ title: '', content: '', coverImageUrl: '' });

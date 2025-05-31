@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.Column;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class Book {
 
     @Id
@@ -31,6 +33,7 @@ public class Book {
 
     private LocalDateTime updatedAt;
 
+    @Column(name = "cover_image_url", length = 1000)
     private String coverImageUrl;
 
 }

@@ -67,6 +67,10 @@ public class BookController {
                 Map.of("status", "success", "message", "도서가 삭제되었습니다.")
         );
     }
-
+//    @DeleteMapping("/")
+//    public ResponseEntity<?> deleteAllBooks() {
+//        bookService.deleteAllBooks();
+//        return ResponseEntity.ok("모든 책 삭제 완료");
+//    }
 
 }
