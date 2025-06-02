@@ -2,6 +2,7 @@ package com.aivle.book_management.service;
 
 import com.aivle.book_management.entity.Book;
 import com.aivle.book_management.repository.BookRepository;
+import java.util.stream.IntStream;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,5 +44,21 @@ public class BookService {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("도서를 찾을 수 없습니다."));
         bookRepository.delete(book);
+    }
+
+    public void insertSampleBooks() {
+        List<Book> books = IntStream.rangeClosed(1, 10)
+                .mapToObj(i -> Book.builder()
+                        .title("예시 책 " + i)
+                        .content("내용 " + i)
+                        .coverImageUrl("https://example.com/book" + i + ".jpg")
+                        .build())
+                .toList();
+
+        bookRepository.saveAll(books);
+    }
+
+    public void deleteAllBooks() {
+        bookRepository.deleteAll();
     }
 }
