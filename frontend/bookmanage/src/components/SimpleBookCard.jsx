@@ -6,7 +6,7 @@ function SimpleBookCard({ id, title, imageUrl }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/books/${id}`);
+    navigate(`/book/${id}`);
   };
 
   return (

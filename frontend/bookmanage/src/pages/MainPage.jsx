@@ -2,19 +2,26 @@ import Header from '../components/Header';
 import SimpleBookCard from '../components/SimpleBookCard';
 import { Container, Typography, Grid, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
-import bookData from '../data.json';
+import { fetchBooks } from '../api/bookservice';
 
 function MainPage() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    // 추천 도서 3개만 (id 기준 앞쪽에서 잘라옴)
-    setBooks(bookData.slice(0, 3));
+    const fetchRecommendedBooks = async () => {
+      try {
+        const data = await fetchBooks();
+        setBooks(data.slice(0, 3)); // 앞에서 3개만 잘라오기
+      } catch (error) {
+        console.error('추천 도서 불러오기 실패:', error);
+      }
+    };
+
+    fetchRecommendedBooks();
   }, []);
 
   return (
     <div>
-      <Header />
       <Container maxWidth="lg" sx={{ py: 5 }}>
         <Box textAlign="center" mb={4}>
           <Typography variant="h4" fontWeight="bold">
@@ -23,11 +30,11 @@ function MainPage() {
         </Box>
         <Grid container spacing={4} justifyContent="center">
           {books.map((book) => (
-            <Grid item key={book.id}>
+            <Grid item key={book.bookId}>
               <SimpleBookCard
-                id={book.id}
+                id={book.bookId}
                 title={book.title}
-                imageUrl={book.imageUrl}
+                imageUrl={book.coverImageUrl}
               />
             </Grid>
           ))}

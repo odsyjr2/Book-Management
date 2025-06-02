@@ -10,7 +10,7 @@ import {
 import Header from '../components/Header';
 import { generateImage } from '../openAiService';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { fetchBookById, updateBook, deleteBook } from '../api/bookservice';
 
 function BookEditPage() {
   const { id } = useParams();
@@ -27,25 +27,21 @@ function BookEditPage() {
   const [loading, setLoading] = useState(false);
   const [apiKey, setApiKey] = useState('');
 
-  // 기존 도서 정보 불러오기
   useEffect(() => {
-    const fetchBook = async () => {
-      try {
-        const res = await axios.get(`http://localhost:8080/books/${id}`);
+    fetchBookById(id)
+      .then(data => {
         setFormData({
-          title: res.data.title,
-          content: res.data.content,
-          coverImageUrl: res.data.coverImageUrl || '',
+          title: data.title,
+          content: data.content,
+          coverImageUrl: data.coverImageUrl || '',
         });
-      } catch (err) {
+      })
+      .catch(() => {
         alert('도서 정보를 불러오는 데 실패했습니다.');
         navigate('/books');
-      }
-    };
-    fetchBook();
+      });
   }, [id, navigate]);
 
-  // 입력 제한 핸들러
   const handleChange = (field, limit) => (event) => {
     const newValue = event.target.value;
     if (newValue.length <= limit) {
@@ -53,7 +49,6 @@ function BookEditPage() {
     }
   };
 
-  // 이미지 생성
   const handleGenerateCover = async () => {
     setLoading(true);
     try {
@@ -65,10 +60,9 @@ function BookEditPage() {
     setLoading(false);
   };
 
-  // 도서 수정
   const handleUpdate = async () => {
     try {
-      await axios.patch(`http://localhost:8080/books/${id}`, formData);
+      await updateBook(id, formData);
       alert('도서가 수정되었습니다.');
       navigate('/books');
     } catch (err) {
@@ -76,11 +70,10 @@ function BookEditPage() {
     }
   };
 
-  // 도서 삭제
   const handleDelete = async () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
-        await axios.delete(`http://localhost:8080/books/${id}`);
+        await deleteBook(id);
         alert('도서가 삭제되었습니다.');
         navigate('/books');
       } catch (err) {
@@ -91,9 +84,7 @@ function BookEditPage() {
 
   return (
     <div>
-      <Header />
       <Container maxWidth="md" sx={{ py: 6 }}>
-        {/* 제목 + 버튼 한 줄 정렬 */}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
           <Typography variant="h5" fontWeight="bold">
             ✏️ {formData.title || '작품 수정'}
@@ -108,7 +99,6 @@ function BookEditPage() {
           </Box>
         </Box>
 
-        {/* 제목 입력 */}
         <TextField
           label={`1. 제목 입력 (${formData.title.length}/${TITLE_LIMIT})`}
           value={formData.title}
@@ -119,7 +109,6 @@ function BookEditPage() {
           margin="normal"
         />
 
-        {/* 내용 입력 */}
         <TextField
           label={`2. 작품 내용 (${formData.content.length}/${CONTENT_LIMIT})`}
           value={formData.content}
@@ -130,7 +119,6 @@ function BookEditPage() {
           margin="normal"
         />
 
-        {/* API 키 */}
         <TextField
           label="3. OpenAI API Key"
           value={apiKey}
@@ -139,7 +127,6 @@ function BookEditPage() {
           margin="normal"
         />
 
-        {/* 이미지 생성 버튼 */}
         <Box sx={{ mt: 2 }}>
           <Button
             variant="contained"
@@ -150,7 +137,6 @@ function BookEditPage() {
           </Button>
         </Box>
 
-        {/* 이미지 미리보기 */}
         {formData.coverImageUrl && (
           <Box sx={{ mt: 4, textAlign: 'center' }}>
             <img

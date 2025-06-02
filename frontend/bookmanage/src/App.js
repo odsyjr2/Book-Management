@@ -8,11 +8,12 @@ import BookListPage from './pages/BookListPage';
 import BookDetailPage from './pages/BookDetailPage';
 import BookEditPage from './pages/BookEditPage';
 import BookSubmitPage from './pages/BookSubmitPage';
-
+import Header from './components/Header';
 
 function App() {
   return (
     <Router>
+      <Header/>
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/new-book" element={<NewBook />} />
