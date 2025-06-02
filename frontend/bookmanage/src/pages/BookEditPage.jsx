@@ -21,6 +21,8 @@ function BookEditPage() {
   const [formData, setFormData] = useState({
     title: '',
     content: '',
+    createdAt: '',
+    updatedAt: '',
     coverImageUrl: '',
   });
   const [loading, setLoading] = useState(false);
@@ -28,11 +30,12 @@ function BookEditPage() {
 
   useEffect(() => {
     fetchBookById(id)
-      .then(res => {
-        const book = res.data; // 백엔드 응답 구조에 맞게 수정
+      .then(book => {// 백엔드 응답 구조에 맞게 수정
         setFormData({
           title: book.title,
           content: book.content,
+          createdAt: book.createdAt,
+          updatedAt: book.updatedAt,
           coverImageUrl: book.coverImageUrl || '',
         });
       })

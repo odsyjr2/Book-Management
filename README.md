@@ -53,6 +53,8 @@ KT AIVLE School 4차 미니프로젝트: **Spring Boot + React 기반 도서 관
 ## 📦 주요 디렉토리 구조
 
 ```
+├── config
+│   └── WebConfig.java
 ├── controller        
 │   └── BookController.java
 │   └── GlobalExceptionHandler.java

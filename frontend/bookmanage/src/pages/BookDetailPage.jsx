@@ -36,8 +36,7 @@ function BookDetailPage() {
         />
         <Box>
           <Typography variant="h4" fontWeight="bold" sx={{ mb: 3 }}>{book.title}</Typography>
-          <Typography variant="subtitle1" gutterBottom>작성자: {book.author}</Typography>
-          <Typography variant="subtitle1" gutterBottom>작성일: {book.date}</Typography>
+          <Typography variant="subtitle1" gutterBottom>작성일: {book.createdAt}</Typography>
           <Typography variant="body1" sx={{ mt: 2 }}>{book.content}</Typography>
         </Box>
       </Box>

@@ -13,6 +13,7 @@ public class BookDto {
     public static class Post {
         private String title;
         private String content;
+        private String coverImageUrl;
     }
 
     @Data
