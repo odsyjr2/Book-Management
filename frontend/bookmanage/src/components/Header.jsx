@@ -27,7 +27,15 @@ function Header() {
             transform: 'translateX(-50%)',
           }}
         >
+          <MuiLink
+              component={Link}
+              to="/"
+              underline="none"
+              color="inherit"
+              sx={{ fontWeight: 'bold', fontSize: '20px' }}
+          >
           <img src={logoimg} alt="로고" style={{ width: '50px', height: '50px' }} />
+          </MuiLink>
         </Box>
 
         {/* 오른쪽: 메뉴 링크들 */}
