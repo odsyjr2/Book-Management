@@ -8,6 +8,7 @@ import {
   Button
 } from '@mui/material';
 import { fetchBookById } from '../api/bookservice';
+import dayjs from "dayjs";
 
 function BookDetailPage() {
   const { id } = useParams();
@@ -36,7 +37,14 @@ function BookDetailPage() {
         />
         <Box>
           <Typography variant="h4" fontWeight="bold" sx={{ mb: 3 }}>{book.title}</Typography>
-          <Typography variant="subtitle1" gutterBottom>작성일: {book.createdAt}</Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            작성일: {dayjs(book.createdAt).format('YYYY년 MM월 DD일 HH시 mm분')}
+          </Typography>
+          {book.updatedAt && book.updatedAt !== book.createdAt && (
+              <Typography variant="subtitle1" gutterBottom>
+                수정일: {dayjs(book.updatedAt).format('YYYY-MM-DD HH:mm:ss')}
+              </Typography>
+          )}
           <Typography variant="body1" sx={{ mt: 2 }}>{book.content}</Typography>
         </Box>
       </Box>
