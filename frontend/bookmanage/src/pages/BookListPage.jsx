@@ -3,6 +3,7 @@ import { Typography, Grid, Box } from '@mui/material';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import { useEffect, useState } from 'react';
 import { fetchBooks } from '../api/bookservice';
+import sampleCover from '../img/SampleCover.png';
 
 function BookListPage() {
   const [books, setBooks] = useState([]);
@@ -34,7 +35,7 @@ function BookListPage() {
                   <BookCard
                     id={book.id}
                     title={book.title}
-                    imageUrl={book.coverImageUrl || 'https://via.placeholder.com/180x260?text=No+Image'}
+                    imageUrl={book.coverImageUrl || sampleCover}
                     showTitleFirst={true}
                   />
                 </Grid>
