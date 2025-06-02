@@ -5,10 +5,12 @@ import {
   Typography,
   CardMedia,
   Container,
-  Button
+  Button,
+  Divider
 } from '@mui/material';
 import { fetchBookById } from '../api/bookservice';
 import dayjs from "dayjs";
+import sampleCover from "../img/SampleCover.png";
 
 function BookDetailPage() {
   const { id } = useParams();
@@ -31,11 +33,11 @@ function BookDetailPage() {
       <Box sx={{ display: 'flex', gap: 4 }}>
         <CardMedia
           component="img"
-          image={book.coverImageUrl}
+          image={book.coverImageUrl || sampleCover}
           alt={book.title}
-          sx={{ width: 200, height: 280 }}
+          sx={{ width: 200, height: 280, objectFit: 'contain' }}
         />
-        <Box>
+        <Box sx={{ flex: 1 }}>
           <Typography variant="h4" fontWeight="bold" sx={{ mb: 3 }}>{book.title}</Typography>
           <Typography variant="subtitle1" gutterBottom>
             작성일: {dayjs(book.createdAt).format('YYYY년 MM월 DD일 HH시 mm분')}
@@ -45,7 +47,20 @@ function BookDetailPage() {
                 수정일: {dayjs(book.updatedAt).format('YYYY-MM-DD HH:mm:ss')}
               </Typography>
           )}
-          <Typography variant="body1" sx={{ mt: 2 }}>{book.content}</Typography>
+          <Divider sx={{ my: 2 }} />
+          <Typography variant="body1" > 줄거리 </Typography>
+          <Typography
+              variant="body1"
+              sx={{
+                mt: 2,
+                backgroundColor: '#f5f5f5',
+                borderRadius: 2,
+                padding: 2,
+                lineHeight: 1.6,
+              }}
+          >
+            {book.content}
+          </Typography>
         </Box>
       </Box>
     </Container>

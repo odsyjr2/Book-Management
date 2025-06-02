@@ -21,7 +21,7 @@ function BookCard({ id, title, imageUrl, showTitleFirst = true }) {
           component="img"
           image={imageUrl}
           alt={title}
-          sx={{ width: 150, height: 220, margin: '0 auto' }}
+          sx={{ width: 150, height: 220, margin: '0 auto', objectFit: 'contain' }}
         />
         {!showTitleFirst && (
           <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 1 }}>

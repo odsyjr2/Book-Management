@@ -1,8 +1,8 @@
-import Header from '../components/Header';
 import SimpleBookCard from '../components/SimpleBookCard';
 import { Container, Typography, Grid, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { fetchBooks } from '../api/bookservice';
+import sampleCover from "../img/SampleCover.png";
 
 function MainPage() {
   const [books, setBooks] = useState([]);
@@ -35,7 +35,7 @@ function MainPage() {
               <SimpleBookCard
                 id={book.id}
                 title={book.title}
-                imageUrl={book.coverImageUrl}
+                imageUrl={book.coverImageUrl || sampleCover}
               />
             </Grid>
           ))}

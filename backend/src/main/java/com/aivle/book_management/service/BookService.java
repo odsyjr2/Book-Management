@@ -51,7 +51,7 @@ public class BookService {
                 .mapToObj(i -> Book.builder()
                         .title("예시 책 " + i)
                         .content("내용 " + i)
-                        .coverImageUrl("https://example.com/book" + i + ".jpg")
+                        .coverImageUrl("")
                         .build())
                 .toList();
 

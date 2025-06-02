@@ -16,7 +16,7 @@ function SimpleBookCard({ id, title, imageUrl }) {
           component="img"
           image={imageUrl}
           alt={title}
-          sx={{ width: 180, height: 260, margin: '0 auto' }}  // ← 여기 크기 키움
+          sx={{ width: 180, height: 260, margin: '0 auto', objectFit: 'contain' }}
         />
         <Box mt={1}>
           <Typography variant="subtitle1" fontWeight="bold">
