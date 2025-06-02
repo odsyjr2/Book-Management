@@ -41,6 +41,7 @@ public class Book {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @Column(length = 1000)
     private String coverImageUrl;
 
 }
