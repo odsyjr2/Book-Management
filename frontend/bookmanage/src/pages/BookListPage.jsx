@@ -30,9 +30,9 @@ function BookListPage() {
           <Box sx={{ maxWidth: '1000px', width: '100%' }}>
             <Grid container spacing={4}>
               {books.map((book) => (
-                <Grid item xs={12} sm={6} md={4} key={book.bookId}>
+                <Grid item xs={12} sm={6} md={4} key={book.id}>
                   <BookCard
-                    id={book.bookId}
+                    id={book.id}
                     title={book.title}
                     imageUrl={book.coverImageUrl || 'https://via.placeholder.com/180x260?text=No+Image'}
                     showTitleFirst={true}

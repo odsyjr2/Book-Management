@@ -20,6 +20,7 @@ export const fetchBooks = async () => {
 export const fetchBookById = async (id) => {
   try {
     const response = await api.get(`/books/${id}`);
+    console.log(response.data.data);
     return response.data.data;
   } catch (error) {
     console.error('fetchBookById error:', error);
@@ -30,6 +31,7 @@ export const fetchBookById = async (id) => {
 // 신규 도서 등록
 export const createBook = async (bookData) => {
   try {
+    console.log(bookData)
     const response = await api.post('/books', bookData);
     return response.data.data;
   } catch (error) {
@@ -41,7 +43,7 @@ export const createBook = async (bookData) => {
 // 도서 정보 수정
 export const updateBook = async (id, bookData) => {
   try {
-    const response = await api.put(`/books/${id}`, bookData);
+    const response = await api.patch(`/books/${id}`, bookData);
     return response.data.data;
   } catch (error) {
     console.error('updateBook error:', error);

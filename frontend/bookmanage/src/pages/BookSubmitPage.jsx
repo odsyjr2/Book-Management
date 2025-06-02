@@ -7,16 +7,15 @@ import {
   Box,
   CircularProgress,
 } from '@mui/material';
-import Header from '../components/Header';
 import { generateImage } from '../openAiService';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { updateBook } from '../api/bookservice';
+import {createBook} from '../api/bookservice';
 
 function BookSubmitPage() {
   const [apiKey, setApiKey] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-  const { id, title, content } = location.state || {};
+  const { title, content } = location.state || {};
 
   const TITLE_LIMIT = 30;
   const CONTENT_LIMIT = 500;
@@ -54,7 +53,7 @@ function BookSubmitPage() {
         return;
       }
 
-      await updateBook(id, formData);
+      await createBook(formData);
       alert('도서 등록 성공!');
       navigate('/books');
       setFormData({ title: '', content: '', coverImageUrl: '' });
