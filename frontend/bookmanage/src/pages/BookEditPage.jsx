@@ -7,7 +7,6 @@ import {
   Box,
   CircularProgress,
 } from '@mui/material';
-import Header from '../components/Header';
 import { generateImage } from '../openAiService';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchBookById, updateBook, deleteBook } from '../api/bookservice';
@@ -29,11 +28,12 @@ function BookEditPage() {
 
   useEffect(() => {
     fetchBookById(id)
-      .then(data => {
+      .then(res => {
+        const book = res.data; // 백엔드 응답 구조에 맞게 수정
         setFormData({
-          title: data.title,
-          content: data.content,
-          coverImageUrl: data.coverImageUrl || '',
+          title: book.title,
+          content: book.content,
+          coverImageUrl: book.coverImageUrl || '',
         });
       })
       .catch(() => {
@@ -83,71 +83,69 @@ function BookEditPage() {
   };
 
   return (
-    <div>
-      <Container maxWidth="md" sx={{ py: 6 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-          <Typography variant="h5" fontWeight="bold">
-            ✏️ {formData.title || '작품 수정'}
-          </Typography>
-          <Box sx={{ display: 'flex', gap: 1 }}>
-            <Button variant="contained" size="small" onClick={handleUpdate}>
-              수정
-            </Button>
-            <Button variant="outlined" size="small" color="error" onClick={handleDelete}>
-              삭제
-            </Button>
-          </Box>
-        </Box>
-
-        <TextField
-          label={`1. 제목 입력 (${formData.title.length}/${TITLE_LIMIT})`}
-          value={formData.title}
-          onChange={handleChange('title', TITLE_LIMIT)}
-          fullWidth
-          multiline
-          rows={2}
-          margin="normal"
-        />
-
-        <TextField
-          label={`2. 작품 내용 (${formData.content.length}/${CONTENT_LIMIT})`}
-          value={formData.content}
-          onChange={handleChange('content', CONTENT_LIMIT)}
-          fullWidth
-          multiline
-          rows={5}
-          margin="normal"
-        />
-
-        <TextField
-          label="3. OpenAI API Key"
-          value={apiKey}
-          onChange={(e) => setApiKey(e.target.value)}
-          fullWidth
-          margin="normal"
-        />
-
-        <Box sx={{ mt: 2 }}>
-          <Button
-            variant="contained"
-            onClick={handleGenerateCover}
-            disabled={loading}
-          >
-            {loading ? <CircularProgress size={24} /> : '이미지 생성'}
+    <Container maxWidth="md" sx={{ py: 6 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+        <Typography variant="h5" fontWeight="bold">
+          ✏️ {formData.title || '작품 수정'}
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <Button variant="contained" size="small" onClick={handleUpdate}>
+            수정
+          </Button>
+          <Button variant="outlined" size="small" color="error" onClick={handleDelete}>
+            삭제
           </Button>
         </Box>
+      </Box>
 
-        {formData.coverImageUrl && (
-          <Box sx={{ mt: 4, textAlign: 'center' }}>
-            <img
-              src={formData.coverImageUrl}
-              alt="도서 커버 이미지"
-              style={{ maxWidth: '100%', maxHeight: '400px' }}
-            />
-          </Box>
-        )}
-      </Container>
-    </div>
+      <TextField
+        label={`1. 제목 입력 (${formData.title.length}/${TITLE_LIMIT})`}
+        value={formData.title}
+        onChange={handleChange('title', TITLE_LIMIT)}
+        fullWidth
+        multiline
+        rows={2}
+        margin="normal"
+      />
+
+      <TextField
+        label={`2. 작품 내용 (${formData.content.length}/${CONTENT_LIMIT})`}
+        value={formData.content}
+        onChange={handleChange('content', CONTENT_LIMIT)}
+        fullWidth
+        multiline
+        rows={5}
+        margin="normal"
+      />
+
+      <TextField
+        label="3. OpenAI API Key"
+        value={apiKey}
+        onChange={(e) => setApiKey(e.target.value)}
+        fullWidth
+        margin="normal"
+      />
+
+      <Box sx={{ mt: 2 }}>
+        <Button
+          variant="contained"
+          onClick={handleGenerateCover}
+          disabled={loading}
+        >
+          {loading ? <CircularProgress size={24} /> : '이미지 생성'}
+        </Button>
+      </Box>
+
+      {formData.coverImageUrl && (
+        <Box sx={{ mt: 4, textAlign: 'center' }}>
+          <img
+            src={formData.coverImageUrl}
+            alt="도서 커버 이미지"
+            style={{ maxWidth: '100%', maxHeight: '400px' }}
+          />
+        </Box>
+      )}
+    </Container>
   );
 }
 
