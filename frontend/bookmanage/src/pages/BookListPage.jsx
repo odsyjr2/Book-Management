@@ -1,4 +1,3 @@
-import Header from '../components/Header';
 import BookCard from '../components/BookCard';
 import { Typography, Grid, Box } from '@mui/material';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
@@ -35,7 +34,7 @@ function BookListPage() {
                   <BookCard
                     id={book.bookId}
                     title={book.title}
-                    imageUrl={book.coverImageUrl}
+                    imageUrl={book.coverImageUrl || 'https://via.placeholder.com/180x260?text=No+Image'}
                     showTitleFirst={true}
                   />
                 </Grid>

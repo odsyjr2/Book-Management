@@ -8,16 +8,17 @@ function MainPage() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    const fetchRecommendedBooks = async () => {
+    const fetchData = async () => {
       try {
-        const data = await fetchBooks();
-        setBooks(data.slice(0, 3)); // 앞에서 3개만 잘라오기
+        const response = await fetchBooks();
+        if (Array.isArray(response)) {
+          setBooks(response.slice(0, 3));
+        }
       } catch (error) {
-        console.error('추천 도서 불러오기 실패:', error);
+        console.error('도서 불러오기 실패:', error);
       }
     };
-
-    fetchRecommendedBooks();
+    fetchData();
   }, []);
 
   return (
@@ -30,9 +31,9 @@ function MainPage() {
         </Box>
         <Grid container spacing={4} justifyContent="center">
           {books.map((book) => (
-            <Grid item key={book.bookId}>
+            <Grid item key={book.id}>
               <SimpleBookCard
-                id={book.bookId}
+                id={book.id}
                 title={book.title}
                 imageUrl={book.coverImageUrl}
               />
