@@ -38,7 +38,7 @@ KT AIVLE School 4차 미니프로젝트: **Spring Boot + React 기반 도서 관
 
   - ✅ curl 사용
 
-  ```curl -X DELETE http://localhost:8080/dev/delete-all-books```
+    ```curl -X DELETE http://localhost:8080/dev/delete-all-books```
 
   - ✅ Postman 사용
   
@@ -56,6 +56,7 @@ KT AIVLE School 4차 미니프로젝트: **Spring Boot + React 기반 도서 관
 ├── controller        
 │   └── BookController.java
 │   └── GlobalExceptionHandler.java
+│   └── DevController.java
 ├── dto              
 │   └── BookDto.java
 ├── entity           
