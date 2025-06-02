@@ -10,18 +10,7 @@ import {
 import Header from '../components/Header';
 import { generateImage } from '../openAiService';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
-// PATCH 요청 함수
-const updateBook = async (id, book) => {
-  try {
-    const response = await axios.patch(`http://localhost:8080/books/${id}`, book);
-    return response.data;
-  } catch (error) {
-    console.error("도서 업데이트 중 오류:", error.response || error.message);
-    throw error;
-  }
-};
+import { updateBook } from '../api/bookservice';
 
 function BookSubmitPage() {
   const [apiKey, setApiKey] = useState('');
@@ -76,13 +65,11 @@ function BookSubmitPage() {
 
   return (
     <div>
-      <Header />
       <Container maxWidth="md" sx={{ py: 6 }}>
         <Typography variant="h5" fontWeight="bold" gutterBottom>
           📘 작품 등록
         </Typography>
 
-        {/* 제목 */}
         <TextField
           label={`1. 제목 입력 (${formData.title.length}/${TITLE_LIMIT})`}
           value={formData.title}
@@ -90,10 +77,9 @@ function BookSubmitPage() {
           fullWidth
           multiline
           rows={2}
-          margin="dense" // 간격 줄이기
+          margin="dense"
         />
 
-        {/* 내용 */}
         <TextField
           label={`2. 작품 내용 (${formData.content.length}/${CONTENT_LIMIT})`}
           value={formData.content}
@@ -101,19 +87,17 @@ function BookSubmitPage() {
           fullWidth
           multiline
           rows={5}
-          margin="dense" // 간격 줄이기
+          margin="dense"
         />
 
-        {/* API Key 입력 */}
         <TextField
           label="3. OpenAI API Key"
           value={apiKey}
           onChange={(e) => setApiKey(e.target.value)}
           fullWidth
-          margin="dense" // 간격 줄이기
+          margin="dense"
         />
 
-        {/* 이미지 생성 버튼 */}
         <Box sx={{ mt: 1 }}>
           <Button
             variant="contained"
@@ -124,7 +108,6 @@ function BookSubmitPage() {
           </Button>
         </Box>
 
-        {/* 이미지 미리보기 영역 */}
         <Box sx={{ mt: 4, minHeight: 200, textAlign: 'center', border: '1px dashed #ccc', borderRadius: 2, p: 2 }}>
           {formData.coverImageUrl ? (
             <>
@@ -145,7 +128,6 @@ function BookSubmitPage() {
           )}
         </Box>
 
-        {/* 등록 버튼 */}
         <Box sx={{ mt: 4 }}>
           <Button
             variant="contained"
